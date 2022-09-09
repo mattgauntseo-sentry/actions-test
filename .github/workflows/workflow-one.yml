@@ -13,6 +13,6 @@ jobs:
       steps:
         - name: Sleep
           run: |
-            echo "Sleeping for 60s"
-            sleep 5 * 60
+            echo "Sleeping for 5m"
+            sleep 300
             echo "Done."
