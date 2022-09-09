@@ -1,0 +1,18 @@
+name: check
+on:
+  push
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sleep:
+      name: sleep
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Sleep
+          run: |
+            echo "Sleeping for 60s"
+            sleep 5 * 60
+            echo "Done."
