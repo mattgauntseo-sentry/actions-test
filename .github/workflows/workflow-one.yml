@@ -3,8 +3,10 @@ on:
   push
 
 concurrency:
-  group: check-${{ github.ref }}
   cancel-in-progress: true
+  group: check-${{ github.head_ref || github.run_id }}
+# This cancelled the workflow on main
+#  group: check-${{ github.ref }}
 
 jobs:
   sleep:
