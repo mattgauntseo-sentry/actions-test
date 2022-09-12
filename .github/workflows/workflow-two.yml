@@ -21,10 +21,10 @@ jobs:
           run: echo "${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}"
         - name: Echo Parts
           run: |
-            echo "${{ github.workflow }}"
-            echo "${{ contains(fromJson('["main", "master"]'), github.ref) }}"
-            echo "${{ github.run_id }}"
-            echo "${{ github.ref }}"
+            echo "Workflow: ${{ github.workflow }}"
+            echo "Branches: ${{ contains(fromJson('["main", "master"]'), github.ref) }}"
+            echo "Run ID:   ${{ github.run_id }}"
+            echo "Ref:      ${{ github.ref }}"
         - name: Sleep
           run: |
             echo "Sleeping for 3m"
