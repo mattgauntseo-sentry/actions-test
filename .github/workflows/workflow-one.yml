@@ -3,7 +3,7 @@ on:
   push
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
+  group: ${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}
   cancel-in-progress: true
 # This cancelled the workflow on main
 #  group: check-${{ github.ref }}
