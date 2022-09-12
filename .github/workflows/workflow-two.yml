@@ -19,8 +19,14 @@ jobs:
       steps:
         - name: Echo Name
           run: echo "${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}"
+        - name: Echo Parts
+          run: |
+            echo "${{ github.workflow }}"
+            echo "${{ contains(fromJson('["main", "master"]'), github.ref) }}"
+            echo "${{ github.run_id }}"
+            echo "${{ github.ref }}"
         - name: Sleep
           run: |
-            echo "Sleeping for 5m"
-            sleep 300
+            echo "Sleeping for 3m"
+            sleep 180
             echo "Done."
