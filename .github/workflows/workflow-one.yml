@@ -18,7 +18,7 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "  group: ${{ github.workflow - ((contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref) }}"
+          run: echo "${{ github.workflow - ((contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref) }}"
         - name: Sleep
           run: |
             echo "Sleeping for 5m"
