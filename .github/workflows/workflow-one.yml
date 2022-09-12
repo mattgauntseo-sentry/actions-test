@@ -3,7 +3,7 @@ on:
   push
 
 concurrency:
-  group: ${{ github.workflow - ((contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref) }}
+  group: ${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}
   cancel-in-progress: true
 # This cancelled the workflow on main
 #  group: check-${{ github.ref }}
@@ -18,7 +18,7 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "${{ github.workflow - ((contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref) }}"
+          run: echo "${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}"
         - name: Sleep
           run: |
             echo "Sleeping for 5m"
