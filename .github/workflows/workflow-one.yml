@@ -3,7 +3,7 @@ on:
   push
 
 concurrency:
-  group: ${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}
+  group: ${{github.workflow}}-${{ ((contains(github.ref, 'main') || contains(github.ref, 'master')) && github.run_id) || github.ref }}
   cancel-in-progress: true
 # This cancelled the workflow on main
 #  group: check-${{ github.ref }}
@@ -18,11 +18,11 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "${{github.workflow}}-${{ (contains(fromJson('["main", "master"]'), github.ref) && github.run_id) || github.ref }}"
+          run: echo "${{github.workflow}}-${{ ((contains(github.ref, 'main') || contains(github.ref, 'master')) && github.run_id) || github.ref }}"
         - name: Echo Parts
           run: |
             echo "Workflow: ${{ github.workflow }}"
-            echo "Branches: ${{ contains(github.ref, 'main') || contains('master', github.ref)}}"
+            echo "Branches: ${{ contains(github.ref, 'main') || contains(github.ref, 'master')}}"
             echo "Run ID:   ${{ github.run_id }}"
             echo "Ref:      ${{ github.ref }}"
         - name: Sleep
