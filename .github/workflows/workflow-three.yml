@@ -1,0 +1,19 @@
+name: Workflow Three
+on: [push, pull_request]
+
+concurrency:
+  group: ${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  sleep:
+      name: sleep
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Echo Name
+          run: echo "${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}"
+        - name: Sleep
+          run: |
+            echo "Sleeping for 3m"
+            sleep 180
+            echo "Done."
