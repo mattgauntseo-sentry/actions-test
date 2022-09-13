@@ -3,7 +3,7 @@ on:
   push
 
 concurrency:
-  group: ${{github.workflow}}-${{ ((contains(github.ref, 'main') || contains(github.ref, 'master')) && github.run_id) || github.ref }}
+  group: ${{github.workflow}}-${{ (contains(github.ref, github.event.repository.default_branch) && github.run_id) || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -16,12 +16,11 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "${{github.workflow}}-${{ ((contains(github.ref, 'main') || contains(github.ref, 'master')) && github.run_id) || github.ref }}"
+          run: echo "${{github.workflow}}-${{ (contains(github.ref, github.event.repository.default_branch) && github.run_id) || github.ref }}"
         - name: Echo Parts
           run: |
             echo "Workflow: ${{ github.workflow }}"
-            echo "Branches: ${{ contains(github.ref, 'main') || contains(github.ref, 'master')}}"
-            echo "Contains: ${{ contains(github.ref, fromJson('["main", "master"]')) }}"
+            echo "Branches: ${{ contains(github.ref, github.event.repository.default_branch) }}"
             echo "Run ID:   ${{ github.run_id }}"
             echo "Ref:      ${{ github.ref }}"
         - name: Sleep
