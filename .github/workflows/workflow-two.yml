@@ -1,6 +1,5 @@
 name: Workflow Two
-on:
-  push
+on: [push, pull_request]
 
 concurrency:
   group: ${{github.workflow}}-${{ (contains(github.ref, github.event.repository.default_branch) && github.run_id) || github.ref }}
