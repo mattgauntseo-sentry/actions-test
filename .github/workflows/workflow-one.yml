@@ -16,7 +16,7 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "${{github.workflow}}-${{ (contains(github.ref, github.event.repository.default_branch) && github.run_id) || github.ref }}"
+          run: echo "${{ github.workflow }} @ ${{ github.event_name == 'pull_request' && github.ref || github.run_id }})"
         - name: Echo Parts
           run: |
             echo "Workflow: ${{ github.workflow }}"
