@@ -23,6 +23,7 @@ jobs:
           run: |
             echo "Workflow: ${{ github.workflow }}"
             echo "Branches: ${{ contains(github.ref, 'main') || contains(github.ref, 'master')}}"
+            echo "Contains: ${{ contains(github.ref, fromJson('["main", "master"]')) }}"
             echo "Run ID:   ${{ github.run_id }}"
             echo "Ref:      ${{ github.ref }}"
         - name: Sleep

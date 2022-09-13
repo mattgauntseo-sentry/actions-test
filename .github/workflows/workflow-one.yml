@@ -5,8 +5,6 @@ on:
 concurrency:
   group: ${{github.workflow}}-${{ ((contains(github.ref, 'main') || contains(github.ref, 'master')) && github.run_id) || github.ref }}
   cancel-in-progress: true
-# This cancelled the workflow on main
-#  group: check-${{ github.ref }}
 
 jobs:
   sleep:
@@ -23,6 +21,7 @@ jobs:
           run: |
             echo "Workflow: ${{ github.workflow }}"
             echo "Branches: ${{ contains(github.ref, 'main') || contains(github.ref, 'master')}}"
+            echo "Contains: ${{ contains(github.ref, fromJson('["main", "master"]')) }}"
             echo "Run ID:   ${{ github.run_id }}"
             echo "Ref:      ${{ github.ref }}"
         - name: Sleep
