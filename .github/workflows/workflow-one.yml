@@ -3,7 +3,7 @@ on:
   push
 
 concurrency:
-  group: ${{ github.workflow }} @ ${{ github.event_name == 'pull_request' && github.ref || github.run_id }})
+  group: ${{ github.workflow }} @ ${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       runs-on: ${{ matrix.os }}
       steps:
         - name: Echo Name
-          run: echo "${{ github.workflow }} @ ${{ github.event_name == 'pull_request' && github.ref || github.run_id }})"
+          run: echo "${{ github.workflow }} @ ${{ github.event_name == 'pull_request' && github.ref || github.run_id }}"
         - name: Echo Parts
           run: |
             echo "Workflow: ${{ github.workflow }}"
