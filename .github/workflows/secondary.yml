@@ -6,7 +6,7 @@ on:
   # do not pass
   workflow_run:
     workflows:
-      - Primary
+      - primary-sleep-name
     types:
       - completed
 
