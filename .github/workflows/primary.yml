@@ -19,7 +19,7 @@ jobs:
         instance: [0, 1, 2, 3]
     steps:
       - name: Echo Primary Instance
-        run: echo "Instance: ${{ matrix.instance }}"
+        run: echo "Instance ${{ matrix.instance }}"
       - name: Do Primary Sleep
         run: |
           echo "Sleeping for 30s"
