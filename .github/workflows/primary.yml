@@ -1,0 +1,24 @@
+name: Primary
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  primary-sleep:
+      name: primary-sleep-name
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Echo Primary Name
+          run: echo "${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}"
+        - name: Do Primary Sleep
+          run: |
+            echo "Sleeping for 30s"
+            sleep 30
+            echo "Done."

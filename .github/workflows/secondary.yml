@@ -1,0 +1,28 @@
+name: Secondary
+on:
+  # This allows PRs opened from forks to execute the Visual Snapshots
+  # since secrets are not passed to workflows when triggered via forks
+  # Using workflow_run is less preferred since it executes even when jobs
+  # do not pass
+  workflow_run:
+    workflows:
+      - Primary
+    types:
+      - completed
+
+concurrency:
+  group: ${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  secondary-sleep:
+      name: secondary-sleep-name
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Echo Secondary Name
+          run: echo "${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}"
+        - name: Do Secondary Sleep
+          run: |
+            echo "Sleeping for 30s"
+            sleep 30
+            echo "Done."
