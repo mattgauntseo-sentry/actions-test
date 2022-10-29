@@ -14,9 +14,12 @@ jobs:
   primary-sleep:
       name: primary-sleep-name
       runs-on: ubuntu-22.04
+      strategy:
+        matrix:
+          instance: [0, 1, 2, 3]
       steps:
-        - name: Echo Primary Name
-          run: echo "${{ github.workflow }} @ ${{ github.head_ref || github.run_id }}"
+        - name: Echo Primary Instance
+          run: echo "Instance: ${{ matrix.instance }}"
         - name: Do Primary Sleep
           run: |
             echo "Sleeping for 30s"
