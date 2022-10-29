@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        instance: [0, 1, 2, 3]
+        instance: [30, 60, 90, 120]
     steps:
       - name: Echo Primary Instance
         run: echo "Instance ${{ matrix.instance }}"
       - name: Do Primary Sleep
         run: |
           echo "Sleeping for 30s"
-          sleep 30
+          sleep ${{ matrix.instance }}
           echo "Done."
